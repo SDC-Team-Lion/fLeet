@@ -1,0 +1,29 @@
+{
+  "name": "fleet",
+  "version": "1.0.0",
+  "description": "HRNYC24 SDC - Using Leopard FEC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SDC-Team-Lion/fLeet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SDC-Team-Lion/fLeet/issues"
+  },
+  "homepage": "https://github.com/SDC-Team-Lion/fLeet#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.19.2",
+    "pg": "^7.12.1",
+    "request": "^2.88.0"
+  }
+}
