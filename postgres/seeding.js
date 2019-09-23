@@ -48,12 +48,12 @@ function newWriteStream() {
 
 lineReader.on('line', function(line) {
   count++;
-  inputJSON = csvJSON(line);
+  inputJSON = formatReviewCSV(line);
   outStream.write(inputJSON + '\n');
   if (count === 1 && fileCount === 1) {
     headers = line.split(',');
   }
-  if (count >= 100000) {
+  if (count >= 10000) {
     fileCount++;
     console.log('file ', outputFile);
     outStream.end();
@@ -120,3 +120,37 @@ function allStreamLines() {
   }
 }
 //
+
+//SQL Format
+function formatReviewCSV(csvLine) {
+  let result = '';
+  let cL = csvLine.split(',');
+  let rev_date = cL[3];
+  let summary = cL[4];
+  let body = cL[5];
+  let rev_name = cL[8];
+  let rev_email = cL[9];
+  let res = cL[10];
+  rev_date[0] = `'`;
+  rev_date[rev_date.length - 1] = `'`;
+  summary[0] = "'";
+  summary[summary.length - 1] = "'";
+  body[0] = "'";
+  body[body.length - 1] = "'";
+  rev_name[0] = "'";
+  rev_name[rev_name.length - 1] = "'";
+  rev_email[0] = "'";
+  rev_email[rev_email.length - 1] = "'";
+  if (res === '') {
+    res = null;
+  } else {
+    res[0] = "'";
+    res[res.length - 1] = "'";
+  }
+  result = `INSERT INTO reviews (id,product_id,rating,rev_date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness) VALUES (${cL[0]},${cL[1]},${cL[2]},'${rev_date}','${summary}','${body}',${cL[6]},${cL[7]},'${rev_name}','${rev_email}',${res},${cL[11]});`
+  // console.log(result);
+  return result;
+}
+
+// INSERT INTO `reviews` (`id`,`product_id`,`rating`,`date`,`summary`,`body`,`recommend`,`reported`,`reviewer_name`,`reviewer_email`,`response`,`helpfulness`) VALUES
+// ('','','','','','','','','','','','');
