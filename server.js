@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const productsRouter = require("./routes/productsAPI");
+const reviewsRouter = require("./routes/reviewsAPI");
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -18,5 +19,6 @@ app.use(function(req, res, next) {
 });
 
 app.use("/products", productsRouter);
+app.use("/reviews", reviewsRouter);
 
 app.listen(port, () => console.log(`Now listening on :${port}`));

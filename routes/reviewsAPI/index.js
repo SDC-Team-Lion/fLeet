@@ -1,0 +1,10 @@
+const router = require("express").Router();
+const { revGet } = require("../../controllers/reviewsAPI/index.js");
+// , revPost, revPut
+router.get("/:product_id/list", revGet.getList);
+// router.get("/:product_id/meta", revGet.getMeta);
+// router.post("/:product_id", revPost.postReview);
+// router.put("/helpful/:review_id", revPut.putHelpful);
+// router.put("/report/:review_id", revPut.putReport);
+
+module.exports = router;
