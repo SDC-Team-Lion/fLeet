@@ -8,7 +8,7 @@ module.exports = {
       if (err) { console.log(err); }
       console.log(res);
       callback(err, res);
-      pgs.client.end();
+    //   pgs.client.end();
     });
   },
 

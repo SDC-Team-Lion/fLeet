@@ -11,11 +11,11 @@ const client = new Client({
   port: 5432
 });
 
-client.connect();
+// client.connect();
 
-client.query('QUERY HERE', (err, res) => {
-  console.log(err, res);
-  client.end();
-})
+// client.query('QUERY HERE', (err, res) => {
+//   console.log(err, res);
+//   client.end();
+// })
 
 exports.client = client;
