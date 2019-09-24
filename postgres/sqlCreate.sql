@@ -20,7 +20,9 @@ CREATE TABLE product_details (
   id SERIAL,
   product_id INTEGER NULL DEFAULT NULL,
   review_id INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (product_id)
+  char_id INTEGER NULL DEFAULT NULL,
+  photo_id INTEGER NULL DEFAULT NULL
+  -- PRIMARY KEY (product_id)
 );
 
 -- ---
@@ -72,7 +74,7 @@ DROP TABLE IF EXISTS characteristics;
 CREATE TABLE characteristics (
   id SERIAL,
   product_id INTEGER NULL DEFAULT NULL,
-  char_name CHAR NULL DEFAULT NULL
+  char_name TEXT NULL DEFAULT NULL
 -- KEY (product_id)
 );
 
@@ -85,8 +87,8 @@ DROP TABLE IF EXISTS characteristics_rev;
 		
 CREATE TABLE characteristics_rev (
   id SERIAL,
-  review_id INTEGER NULL DEFAULT NULL,
   characteristic_id INTEGER NULL DEFAULT NULL,
+  review_id INTEGER NULL DEFAULT NULL,
   char_value INTEGER NULL DEFAULT NULL
 -- KEY (review_id)
 );
