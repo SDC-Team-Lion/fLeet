@@ -14,20 +14,19 @@
 -- 
 -- ---
 
-DROP TABLE IF EXISTS product_details;
+-- DROP TABLE IF EXISTS product_details;
 		
-CREATE TABLE product_details (
-  id SERIAL,
-  product_id INTEGER NULL DEFAULT NULL,
-  review_id INTEGER NULL DEFAULT NULL,
-  char_id INTEGER NULL DEFAULT NULL,
-  photo_id INTEGER NULL DEFAULT NULL
+-- CREATE TABLE product_details (
+--   id SERIAL,
+--   product_id INTEGER NULL DEFAULT NULL,
+--   review_id INTEGER NULL DEFAULT NULL,
+--   char_id INTEGER NULL DEFAULT NULL,
+--   photo_id INTEGER NULL DEFAULT NULL
   -- PRIMARY KEY (product_id)
-);
+-- );
 
 -- ---
 -- Table 'reviews'
--- 
 -- ---
 
 DROP TABLE IF EXISTS reviews;
@@ -45,12 +44,10 @@ CREATE TABLE reviews (
   reviewer_email TEXT NULL DEFAULT NULL,
   response TEXT NULL DEFAULT NULL,
   helpfulness INTEGER NULL DEFAULT NULL,
-  PRIMARY KEY (id)
 );
 
 -- ---
 -- Table 'photos'
--- 
 -- ---
 
 DROP TABLE IF EXISTS photos;
@@ -59,14 +56,11 @@ CREATE TABLE photos (
   id SERIAL,
   review_id INTEGER NULL DEFAULT NULL,
   url_str VARCHAR NULL DEFAULT NULL
--- KEY (review_id)
 );
 
--- CREATE INDEX review_id ON photos;
 
 -- ---
 -- Table 'characteristics'
--- 
 -- ---
 
 DROP TABLE IF EXISTS characteristics;
@@ -75,12 +69,10 @@ CREATE TABLE characteristics (
   id SERIAL,
   product_id INTEGER NULL DEFAULT NULL,
   char_name TEXT NULL DEFAULT NULL
--- KEY (product_id)
 );
 
 -- ---
 -- Table 'characteristics_rev'
--- 
 -- ---
 
 DROP TABLE IF EXISTS characteristics_rev;
@@ -90,8 +82,15 @@ CREATE TABLE characteristics_rev (
   characteristic_id INTEGER NULL DEFAULT NULL,
   review_id INTEGER NULL DEFAULT NULL,
   char_value INTEGER NULL DEFAULT NULL
--- KEY (review_id)
 );
+
+-- ---
+-- Indexing
+-- ---
+CREATE INDEX product_index ON reviews USING HASH (product_id);
+CREATE INDEX review_index ON characteristics_rev USING HASH (review_id);
+CREATE INDEX prodchar_index ON characteristics USING HASH (product_id);
+CREATE INDEX revphoto_index ON photos USING HASH (review_id);
 
 -- ---
 -- Foreign Keys 
