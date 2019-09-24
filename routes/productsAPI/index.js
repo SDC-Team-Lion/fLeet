@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const { products } = require("../../controllers/productsAPI/index.js");
+const { products, styles } = require("../../controllers/productsAPI/index.js");
 
+router.get("/list", products.getMany);
+router.get("/:product_id/styles", styles.getAllForProductId);
 router.get("/:product_id", products.getOneById);
 
 module.exports = router;

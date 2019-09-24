@@ -7,12 +7,14 @@ const featureSchemaTemplate = require("./feature-schema-template.js");
 const styleSchemaTemplate = require("./style-schema-template.js");
 const relatedSchemaTemplate = require("./related-schema-template.js");
 const skuSchemaTemplate = require("./sku-schema-template.js");
+const photoSchemaTemplate = require("./photo-schema-template.js");
 
 const productsSchema = new mongoose.Schema(productSchemaTemplate);
 const featureSchema = new mongoose.Schema(featureSchemaTemplate);
 const styleSchema = new mongoose.Schema(styleSchemaTemplate);
 const relatedSchema = new mongoose.Schema(relatedSchemaTemplate);
 const skuSchema = new mongoose.Schema(skuSchemaTemplate);
+const photoSchema = new mongoose.Schema(photoSchemaTemplate);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Error connecting to MongoDB:"));
@@ -25,5 +27,6 @@ module.exports = {
   Feature: mongoose.model("Feature", featureSchema),
   Style: mongoose.model("Style", styleSchema),
   Related: mongoose.model("Related", relatedSchema),
-  SKU: mongoose.model("Sku", skuSchema)
+  SKU: mongoose.model("Sku", skuSchema),
+  Photo: mongoose.model("Photo", photoSchema)
 };

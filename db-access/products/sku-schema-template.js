@@ -122,3 +122,156 @@ db.products.aggregate([
   }
 ]);
 */
+/*
+db.products.aggregate([
+  { $match: { id: 1 } },
+  { $project: { id: 1, _id: 0 } },
+  {
+    $lookup: {
+      from: "styles",
+      pipeline: [
+        { $match: { productId: 1 } },
+        { $project: { _id: 0, __v: 0, productId: 0 } },
+        {
+          $lookup: {
+            from: "skus",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              { $project: { _id: 0, __v: 0 } }
+            ],
+            as: "skus"
+          }
+        },
+        {
+          $lookup: {
+            from: "photos",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              { $project: { _id: 0, __v: 0, styleId:0 } }
+            ],
+            as: "photos"
+          }
+        }
+      ],
+      as: "results"
+    }
+  }
+]);
+*/
+/*
+db.products.aggregate([
+  { $match: { id: 1 } },
+  { $project: { product_id: "$id", _id: 0 } },
+  {
+    $lookup: {
+      from: "styles",
+      pipeline: [
+        { $match: { productId: 1 } },
+        { $project: { "default?":"$default", style_id:1,name:1,original_price:1,sale_price:1,_id: 0 } },
+        {
+          $lookup: {
+            from: "skus",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              { $project: { _id: 0, __v: 0 } }
+            ],
+            as: "skus"
+          }
+        },
+        {
+          $lookup: {
+            from: "photos",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              { $project: { _id: 0, __v: 0, styleId:0 } }
+            ],
+            as: "photos"
+          }
+        }
+      ],
+      as: "results"
+    }
+  }
+]);
+*/
+/*
+  {
+    $replaceRoot: {
+      newRoot: {
+        $arrayToObject: [
+          [
+            {
+              k: "$code",
+              v: "$item"
+            }
+          ]
+        ]
+      }
+    }
+  }
+*/
+/*
+db.products.aggregate([
+  { $match: { id: 1 } },
+  { $project: { product_id: "$id", _id: 0 } },
+  {
+    $lookup: {
+      from: "styles",
+      pipeline: [
+        { $match: { productId: 1 } },
+        {
+          $project: {
+            "default?": "$default",
+            style_id: 1,
+            name: 1,
+            original_price: 1,
+            sale_price: 1,
+            _id: 0
+          }
+        },
+        {
+          $lookup: {
+            from: "skus",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              {
+                $replaceRoot: {
+                  newRoot: {
+                    $arrayToObject: [
+                      [
+                        {
+                          k: "$size",
+                          v: "$quantity"
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              { $project: { _id: 0, __v: 0 } }
+            ],
+            as: "skus"
+          }
+        },
+        {
+          $lookup: {
+            from: "photos",
+            let: { styleIdForStyle: "$style_id" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$$styleIdForStyle", "$styleId"] } } },
+              { $project: { _id: 0, __v: 0, styleId: 0 } }
+            ],
+            as: "photos"
+          }
+        }
+      ],
+      as: "results"
+    }
+  }
+]);
+*/

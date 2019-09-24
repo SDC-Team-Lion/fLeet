@@ -1,10 +1,12 @@
 const { Product } = require("../../db-access/products");
 
-exports.retrieve = (count = 1) => {
+exports.retrieve = (count, page) => {
   return Product.find({})
+    .skip(count * page)
     .limit(count)
     .select({
-      _id: 0
+      _id: 0,
+      __v: 0
     });
 };
 
