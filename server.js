@@ -18,5 +18,9 @@ app.use(function(req, res, next) {
 });
 
 app.use("/products", productsRouter);
+app.get(/(cart|reviews|qa)*/, (req, res) => {
+  console.log(req.path);
+  res.redirect("http://18.217.220.129" + req.path);
+});
 
 app.listen(port, () => console.log(`Now listening on :${port}`));

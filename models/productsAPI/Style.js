@@ -54,7 +54,7 @@ exports.retrieveAllForProductId = productId => {
 
 /*
 db.styles.aggregate([
-    { $match: { productId: 1 } },
+    { $match: { productId: 2 } },
     {
       $project: {
         "default?": "$default",
@@ -85,7 +85,7 @@ db.styles.aggregate([
               }
             }
           },
-          { $project: { _id: 0, __v: 0 } }
+          { $project: { _id: 0, __v: 0  } }
         ],
         as: "skus"
       }
