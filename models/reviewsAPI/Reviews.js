@@ -1,4 +1,5 @@
 const pgQuery = require('../../db-access/reviews/postgresQuery.js');
+const format = require('./format.js');
 
 module.exports = {
   getAll: (prod_id, callback) => {
@@ -11,7 +12,8 @@ module.exports = {
       ON photos.review_id=reviews.id
       WHERE reviews.product_id=${prod_id}`
     pgQuery.get(query, (err, results) => {
-      callback(err, results);
+      // let formatted = format.reviewsMain(results.rows);
+      callback(err, results.rows);
     });
   },
 
@@ -29,8 +31,25 @@ module.exports = {
 
   putHelp: (rev_id, callback) => {
     let query = `
-    `
+      UPDATE reviews
+      SET helpfulness = helpfulness + 1
+      WHERE id=${rev_id};`;
+    pgQuery.put(query, (err, results) => {
+      callback(err, results);
+    });
+  },
+
+  putRep: (rev_id, callback) => {
+    let query = `
+      UPDATE reviews
+      SET reported = true
+      WHERE id=${rev_id};`;
+    pgQuery.put(query, (err, results) => {
+      callback(err, results);
+    });
   }
+
+
 }
 
 // select * from reviews left join photos on reviews.id=photos.review_id where reviews.product_id=1997;

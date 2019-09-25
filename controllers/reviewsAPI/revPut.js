@@ -8,13 +8,13 @@ module.exports = {
         console.log(err);
         res.status(500).send('Error sending data to database');
       } else {
-        res.status(201).send(results.rows);
+        res.status(201).send(results);
       }
     });
   },
 
   putReport: (req, res) => {
-    dbGet.getMeta(req.params.review_id, (err, results) => {
+    dbPut.putRep(req.params.review_id, (err, results) => {
       if (err) {
         console.log(err);
         res.status(500).send('Error sending data to database');
