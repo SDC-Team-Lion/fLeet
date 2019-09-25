@@ -14,7 +14,7 @@ module.exports = {
   },
 
   getMeta: (req, res) => {
-    dbGet.getMeta(req.prod_id, (err, results) => {
+    dbGet.getMeta(req.params.product_id, (err, results) => {
       if (err) {
         console.log(err);
         res.status(500).send('Error retrieving data from database');

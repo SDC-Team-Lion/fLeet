@@ -2,11 +2,10 @@ const pgs = require('./index.js');
 
 module.exports = {
   get: function(str, callback) {
-    let queryStr = str || 'SELECT * FROM reviews WHERE product_id = 1337;';
+    let queryStr = str;
     pgs.client.connect();
     pgs.client.query(queryStr, (err, res) => {
       if (err) { console.log(err); }
-      console.log(res);
       callback(err, res);
     //   pgs.client.end();
     });
@@ -14,5 +13,15 @@ module.exports = {
 
   post: function(str, callback) {
     console.log('post');
+  },
+
+  put: function(str, callback) {
+    let queryStr = str;
+    pgs.client.connect();
+    pgs.client.query(queryStr, (err, res) => {
+      if (err) { console.log(err); }
+      callback(err, res);
+    });
+    // pgs.client.end();
   }
 }
