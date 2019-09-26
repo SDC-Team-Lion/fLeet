@@ -12,7 +12,11 @@ module.exports = {
   },
 
   post: function(str, callback) {
-    console.log('post');
+    let queryStr = str;
+    pgs.client.query(queryStr, (err, res) => {
+      if (err) { console.log(err); }
+      callback(err, res);
+    });
   },
 
   put: function(str, callback) {
