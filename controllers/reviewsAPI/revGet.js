@@ -22,5 +22,16 @@ module.exports = {
         res.status(200).send(results);
       }
     });
+  },
+
+  getCount: (req, res) => {
+    dbGet.getCount((err, results) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Error at database');
+      } else {
+        res.status(200).send(results.rows[0].count);  // results.rows[0].count is a string
+      }
+    });
   }
 }

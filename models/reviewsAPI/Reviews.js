@@ -36,7 +36,12 @@ module.exports = {
     let yyyy = today.getFullYear();
     today = `${mm}/${dd}/${yyyy}`;
     let charQuery = '';
-    let photoQuery = '';
+    let photoQuery = `
+      INSERT INTO photos (id,review_id,url_str)
+      VALUES (DEFAULT,`;
+    // for (let i = 0; i < revObj.photos.length; i++) {
+    //   photoQuery +=
+    // }
 
     let query = `
       INSERT INTO reviews
@@ -44,7 +49,7 @@ module.exports = {
       VALUES (DEFAULT,${prod_id},${revObj.rating},${today},${revObj.summary},${revObj.body},${revObj.recommended},false,${revObj.name},${revObj.email},null,0);
       ${charQuery}
       ${photoQuery}`;
-      
+
     pgQuery.post(query, (err, results) => {
       callback(err, results);
     });
@@ -59,7 +64,12 @@ module.exports = {
   //   email: this.state.emailEntry,
   //   photos: this.state.photos, array of URL strings
   //   characteristics: this.state.characteristics
-
+  getCount: (callback) => {
+    let query = `select count(*) from reviews;`;
+    pgQuery.get(query, (err, results) => {
+      callback(err, results);
+    });
+  },
 
   putHelp: (rev_id, callback) => {
     let query = `

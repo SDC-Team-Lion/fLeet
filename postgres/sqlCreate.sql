@@ -32,7 +32,7 @@
 DROP TABLE IF EXISTS reviews;
 		
 CREATE TABLE reviews (
-  id SERIAL,
+  id INTEGER PRIMARY KEY,
   product_id INTEGER NULL DEFAULT NULL,
   rating INTEGER NULL DEFAULT NULL,
   rev_date TEXT NULL DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE reviews (
   reviewer_name TEXT NULL DEFAULT NULL,
   reviewer_email TEXT NULL DEFAULT NULL,
   response TEXT NULL DEFAULT NULL,
-  helpfulness INTEGER NULL DEFAULT NULL,
+  helpfulness INTEGER NULL DEFAULT NULL
 );
 
 -- ---

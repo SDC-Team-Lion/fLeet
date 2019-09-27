@@ -6,5 +6,6 @@ router.get("/:product_id/list", revGet.getList);
 router.post("/:product_id", revPost.postReview);
 router.put("/helpful/:review_id", revPut.putHelpful);
 router.put("/report/:review_id", revPut.putReport);
+router.get("/test/count", revGet.getCount);
 
 module.exports = router;
