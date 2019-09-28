@@ -1,6 +1,9 @@
-const { mongoAddress } = require("../../config");
+const { mongoAddress } = process.env || require("../../config");
 const mongoose = require("mongoose");
-mongoose.connect(mongoAddress);
+mongoose.connect(mongoAddress, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 const productSchemaTemplate = require("./product-schema-template.js");
 const featureSchemaTemplate = require("./feature-schema-template.js");
