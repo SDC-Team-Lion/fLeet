@@ -1,6 +1,6 @@
 const { mongoAddress } = process.env || require("../../config");
 const mongoose = require("mongoose");
-mongoose.connect(mongoAddress, {
+mongoose.connect("mongodb://localhost/products", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
