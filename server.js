@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const path = require("path");
 const productsRouter = require("./routes/productsAPI");
 const reviewsRouter = require("./routes/reviewsAPI");
 const port = process.env.PORT || 3000;
@@ -20,5 +21,13 @@ app.use(function(req, res, next) {
 
 app.use("/products", productsRouter);
 app.use("/reviews", reviewsRouter);
+
+app.use("/loaderio-8409c253c22c9219234e814df0acff31/", (req, res) => {
+  res.sendFile("/container-temp/test.txt");
+});
+app.get(/(cart|qa)*/, (req, res) => {
+  console.log(req.path);
+  res.redirect("http://18.217.220.129" + req.path);
+});
 
 app.listen(port, () => console.log(`Now listening on :${port}`));

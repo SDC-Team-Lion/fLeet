@@ -27,7 +27,7 @@ exports.retrieveOne = id => {
         as: "features"
       }
     }
-  ]);
+  ]).then(docs => docs[0]);
 };
 
 //db.products.aggregate([{$match:{id:1}},{$project:{"_id":0,"__v":0}},{$lookup: { from: "features",pipeline:[{$match:{productId:1}},{$project:{"_id":0,"__v":0, "productId":0}}],as:"features"}}])
