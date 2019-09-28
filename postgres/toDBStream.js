@@ -1,3 +1,5 @@
+// SEE COMMENT AT THE TOP OF SEEDING.JS
+
 const fs = require("fs");
 const path = require('path');
 const { Pool } = require('pg');

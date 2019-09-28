@@ -12,8 +12,8 @@ module.exports = {
       ON photos.review_id=reviews.id
       WHERE reviews.product_id=${prod_id}`
     pgQuery.get(query, (err, results) => {
-      // let formatted = format.reviewsMain(results.rows);
-      callback(err, results.rows);
+      let formatted = format.reviewsMain(results.rows);
+      callback(err, formatted);
     });
   },
 

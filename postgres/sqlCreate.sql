@@ -1,3 +1,5 @@
+-- SQL COMMANDS for table creation/indexing
+
 -- \copy reviews (id,product_id,rating,rev_date,summary,body,recommend,reported,reviewer_name,reviewer_email,response,helpfulness)
 -- from './reviews.csv'
 -- with (header true, format csv);
@@ -53,9 +55,9 @@ CREATE TABLE reviews (
 DROP TABLE IF EXISTS photos;
 		
 CREATE TABLE photos (
-  id SERIAL,
+  id INTEGER PRIMARY KEY,
   review_id INTEGER NULL DEFAULT NULL,
-  url_str VARCHAR NULL DEFAULT NULL
+  url_str TEXT NULL DEFAULT NULL
 );
 
 
@@ -66,7 +68,7 @@ CREATE TABLE photos (
 DROP TABLE IF EXISTS characteristics;
 		
 CREATE TABLE characteristics (
-  id SERIAL,
+  id INTEGER PRIMARY KEY,
   product_id INTEGER NULL DEFAULT NULL,
   char_name TEXT NULL DEFAULT NULL
 );
@@ -78,7 +80,7 @@ CREATE TABLE characteristics (
 DROP TABLE IF EXISTS characteristics_rev;
 		
 CREATE TABLE characteristics_rev (
-  id SERIAL,
+  id INTEGER PRIMARY KEY,
   characteristic_id INTEGER NULL DEFAULT NULL,
   review_id INTEGER NULL DEFAULT NULL,
   char_value INTEGER NULL DEFAULT NULL

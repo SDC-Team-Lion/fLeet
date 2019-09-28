@@ -4,7 +4,7 @@ const { Pool, Client } = require('pg');
 
 
 const client = new Client({
-  host: `ec2-34-230-42-31.compute-1.amazonaws.com`, // 'localhost',
+  host: `ec2-3-92-180-174.compute-1.amazonaws.com`, // 'localhost',
   user: 'student',
   password: 'student',
   database: 'sdc_reviews', // 'test',
