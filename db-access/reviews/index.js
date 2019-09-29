@@ -2,10 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const { Pool, Client } = require('pg');
 const { postgresURI } = require('../../config');
+const sqlHost = process.env.awsURL || 'localhost';
 
 
 const client = new Client({
-  host: `ec2-3-92-180-174.compute-1.amazonaws.com`, // 'localhost',
+  host: sqlHost, // 'localhost',
   user: 'student',
   password: 'student',
   database: 'sdc_reviews', // 'test',

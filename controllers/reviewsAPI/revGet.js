@@ -33,5 +33,10 @@ module.exports = {
         res.status(200).send(results.rows[0].count);  // results.rows[0].count is a string
       }
     });
+  },
+
+  getEnv: (req, res) => {
+    console.log(`${process.env.testvar}`);
+    res.status(200).send(`${process.env.testvar}`);
   }
 }
