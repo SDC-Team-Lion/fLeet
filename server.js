@@ -6,6 +6,7 @@ const path = require("path");
 const productsRouter = require("./routes/productsAPI");
 const reviewsRouter = require("./routes/reviewsAPI");
 const port = process.env.PORT || 3000;
+const loaderIOToken = process.env.LIOToken || 'null';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,9 @@ app.use(function(req, res, next) {
 app.use("/products", productsRouter);
 app.use("/reviews", reviewsRouter);
 
+app.use(`/${loaderIOToken}`, (req, res) => {
+  res.send(`${loaderIOToken}`);
+});
 app.use("/loaderio-8409c253c22c9219234e814df0acff31/", (req, res) => {
   res.sendFile("/container-temp/test.txt");
 });
