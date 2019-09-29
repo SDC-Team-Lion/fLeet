@@ -16,6 +16,7 @@ const client = new Client({
 client.connect((err) => {
   if (err) {
     console.log(err);
+    console.log('awsURL?:', sqlHost);
   } else {
     console.log('Connected to Postgres');
   }
