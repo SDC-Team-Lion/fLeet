@@ -3,8 +3,6 @@ const format = require('./format.js');
 
 module.exports = {
   getAll: (prod_id, callback) => {
-    // let query = "I hate SQL queries." ####
-    // ############### yea dont forget to delete this
     let query = `
       SELECT photos.id as pid, photos.*, reviews.*
       FROM reviews
@@ -12,8 +10,14 @@ module.exports = {
       ON photos.review_id=reviews.id
       WHERE reviews.product_id=${prod_id}`
     pgQuery.get(query, (err, results) => {
-      let formatted = format.reviewsMain(results.rows);
-      callback(err, formatted);
+      // console.log(results.rows.length === 0);
+      // callback(err, results.rows);
+      if (results.rows.length === 0) {
+        callback(err, {});
+      } else {
+        let formatted = format.reviewsMain(results.rows);
+        callback(err, formatted);
+      }
     });
   },
 
@@ -38,7 +42,7 @@ module.exports = {
   },
 
   getCount: (callback) => {
-    let query = `select count(*) from reviews;`;
+    let query = `select * from review_count where id=1;`;
     pgQuery.get(query, (err, results) => {
       callback(err, results);
     });

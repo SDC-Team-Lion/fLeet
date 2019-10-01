@@ -1,7 +1,9 @@
 const dbGet = require('../../models/reviewsAPI/Reviews.js');
 
 module.exports = {
-  getList: (req, res) => {    
+  getList: (req, res) => {
+    // console.log(req.params.product_id);
+    // res.status(200).send('test');
     // res.status(200).send(`${typeof req.params.product_id}`);
     dbGet.getAll(req.params.product_id, (err, results) => {
       if (err) {
@@ -30,7 +32,7 @@ module.exports = {
         console.log(err);
         res.status(500).send('Error at database');
       } else {
-        res.status(200).send(results.rows[0].count);  // results.rows[0].count is a string
+        res.status(200).send(results); //.rows[0].count);  // results.rows[0].count is a string
       }
     });
   },

@@ -1,3 +1,5 @@
+const { getCount } = require('./Reviews.js');
+
 module.exports = {
   reviewsMain: (data) => {
     let tracker = {};
@@ -30,6 +32,7 @@ module.exports = {
   },
   newReview: (revObj, prod_id) => {
 
+    let rev_id = null;
     let charQuery = '';
     let photoQuery = `
       INSERT INTO photos (id,review_id,url_str)
@@ -50,6 +53,8 @@ module.exports = {
     VALUES (DEFAULT,${prod_id},${revObj.rating},${today},${revObj.summary},${revObj.body},${revObj.recommended},false,${revObj.name},${revObj.email},null,0);
     ${charQuery}
     ${photoQuery}`;
+
+    
 
     return query;
   }
