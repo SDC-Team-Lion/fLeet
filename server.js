@@ -21,13 +21,14 @@ app.use(function(req, res, next) {
 });
 
 app.use("/products", productsRouter);
-app.use("/reviews", reviewsRouter);
+
 
 app.use(`/${loaderIOToken}`, (req, res) => {
   res.send(`${loaderIOToken}`);
 });
-app.use("/loaderio-8409c253c22c9219234e814df0acff31/", (req, res) => {
-  res.sendFile("/container-temp/test.txt");
+app.use("/reviews", reviewsRouter);
+app.use(`/${process.env.LOADERENDPOINT || Math.random()}`, (req, res) => {
+  res.send(process.env.LOADERENDPOINT || Math.random());
 });
 app.get(/(cart|qa)*/, (req, res) => {
   console.log(req.path);
