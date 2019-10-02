@@ -1,3 +1,5 @@
+const { getCount } = require('./Reviews.js');
+
 module.exports = {
   reviewsMain: (data) => {
     let tracker = {};
@@ -30,13 +32,16 @@ module.exports = {
   },
   newReview: (revObj, prod_id) => {
 
+    process.env.rev_count++;
+    let rev_id = process.env.rev_count;
     let charQuery = '';
-    let photoQuery = `
+    let photoTemplate = `
       INSERT INTO photos (id,review_id,url_str)
-      VALUES (DEFAULT,`;
-    // for (let i = 0; i < revObj.photos.length; i++) {
-    //   photoQuery +=
-    // }
+      VALUES (DEFAULT,${rev_id},`;
+    let photoQuery = '';
+    for (let i = 0; i < revObj.photos.length; i++) {
+      photoQuery += photoTemplate + revObj.photos[i].url +');';
+    }
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
@@ -50,6 +55,8 @@ module.exports = {
     VALUES (DEFAULT,${prod_id},${revObj.rating},${today},${revObj.summary},${revObj.body},${revObj.recommended},false,${revObj.name},${revObj.email},null,0);
     ${charQuery}
     ${photoQuery}`;
+
+    
 
     return query;
   }

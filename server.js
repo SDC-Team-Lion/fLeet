@@ -6,6 +6,7 @@ const path = require("path");
 const productsRouter = require("./routes/productsAPI");
 const reviewsRouter = require("./routes/reviewsAPI");
 const port = process.env.PORT || 3000;
+const loaderIOToken = process.env.LIOToken || 'null';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,6 +23,9 @@ app.use(function(req, res, next) {
 app.use("/products", productsRouter);
 
 
+app.use(`/${loaderIOToken}`, (req, res) => {
+  res.send(`${loaderIOToken}`);
+});
 app.use("/reviews", reviewsRouter);
 app.use(`/${process.env.LOADERENDPOINT || Math.random()}`, (req, res) => {
   res.send(process.env.LOADERENDPOINT || Math.random());

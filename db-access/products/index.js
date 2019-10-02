@@ -2,6 +2,7 @@ console.log("process.env: " + JSON.stringify(process.env));
 const mongoAddress =
   process.env.mongoAddress || require("../../config").mongoAddress;
 const mongoose = require("mongoose");
+
 console.log("mongoAddress: " + mongoAddress);
 mongoose.connect(mongoAddress, {
   useNewUrlParser: true,
