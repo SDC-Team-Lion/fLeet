@@ -3,7 +3,7 @@ const fs = require('fs');
 const { Pool, Client } = require('pg');
 const { postgresURI } = require('../../config');
 const revi = require('../../models/reviewsAPI/Reviews.js');
-const sqlHost = process.env.awsURL || 'ec2-54-92-170-150.compute-1.amazonaws.com';
+const sqlHost = process.env.awsURL || 'ec2-52-90-85-208.compute-1.amazonaws.com';
 
 
 const client = new Client({
@@ -23,8 +23,9 @@ client.connect((err) => {
     console.log('Connected to Postgres');
     client.query(`select * from review_count where id=1;`, (err, res) => {
       if (err) { console.log(err); }
-      console.log(res.rows[0].rev_count);
-    })
+      process.env.rev_count = res.rows[0].rev_count;
+      console.log('reviews count:', process.env.rev_count);
+    });
     // getCount((err, res) => {
     //   console.log(res);
     // })

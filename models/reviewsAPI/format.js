@@ -32,14 +32,16 @@ module.exports = {
   },
   newReview: (revObj, prod_id) => {
 
-    let rev_id = null;
+    process.env.rev_count++;
+    let rev_id = process.env.rev_count;
     let charQuery = '';
-    let photoQuery = `
+    let photoTemplate = `
       INSERT INTO photos (id,review_id,url_str)
-      VALUES (DEFAULT,`;
-    // for (let i = 0; i < revObj.photos.length; i++) {
-    //   photoQuery +=
-    // }
+      VALUES (DEFAULT,${rev_id},`;
+    let photoQuery = '';
+    for (let i = 0; i < revObj.photos.length; i++) {
+      photoQuery += photoTemplate + revObj.photos[i].url +');';
+    }
 
     let today = new Date();
     let dd = String(today.getDate()).padStart(2, '0');
